@@ -1,6 +1,6 @@
 # Go Music JS v0.1.4
 
-Go Music JS 是基于 `go-music-dl` 思路制作的 Songloft JS 插件版，面向 Songloft 插件环境使用。插件将多平台音乐搜索、播放、歌词、封面、歌单与导入能力整合到 Songloft 内，无需单独打开原版 go-music 容器页面。
+Go Music JS 是 go-music-dl 项目的 JS 插件版，面向 Songloft 插件系统使用。插件将多平台音乐搜索、播放、歌词、封面、歌单与导入能力整合到 Songloft 内，无需单独打开原版 go-music 容器页面。
 
 本插件在接口与功能设计上参考了 `go-music-dl` 项目，并在歌单、排行榜、换源弹窗与部分交互体验上参考了洛雪音乐相关项目的设计思路。
 

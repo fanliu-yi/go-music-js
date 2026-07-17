@@ -1,6 +1,6 @@
 # Go Music JS
 
-Go Music JS 是 `go-music-dl` 项目的 JS 插件版，面向 Songloft 插件系统使用。插件将多平台音乐搜索、播放、歌词、封面、歌单与导入能力整合到 Songloft 内，适合在 Songloft 中作为音乐搜索与播放插件使用。
+Go Music JS 是 go-music-dl 项目的 JS 插件版，面向 Songloft 插件系统使用。插件将多平台音乐搜索、播放、歌词、封面、歌单与导入能力整合到 Songloft 内，适合在 Songloft 中作为音乐搜索与播放插件使用。
 
 
 ## 功能概览
