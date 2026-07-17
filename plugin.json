@@ -17,6 +17,8 @@
     "playlists.read",
     "playlists.write"
   ],
+  "download_url": "https://github.com/fanliu-yi/go-music-js/releases/download/v0.1.4/go-music-js-v0.1.4.jsplugin.zip",
+  "updateUrl": "https://raw.githubusercontent.com/fanliu-yi/go-music-js/main/plugin.json",
   "entryHash": "8ea5fc7104bb02f71a8af6d5410d1062305a739781ec242508299283b5826175",
   "zipHash": "1fcde0db043ac54b2a2ed270101874b7f4a5187f8bbc16b423f81aa998dcd896"
 }
