@@ -26,6 +26,10 @@ Go Music JS 是 `go-music-dl` 项目的 JS 插件版，面向 Songloft 插件系
 4. 如需读取平台用户歌单，请进入插件设置页填写 Cookie 或使用支持的平台扫码登录。
 5. 歌曲无法播放或识别错误时，点击歌曲旁边的“换源”按钮，试听候选歌曲后确认替换。
 
+## 汽水 Cookie 导入助手
+
+汽水音乐扫码登录依赖浏览器风控环境，插件内暂不直接提供扫码入口。可安装 `scripts/qishui-cookie-import.user.js` 油猴脚本，在浏览器中登录汽水音乐后，将 Cookie 导入 Go Music JS 插件设置。
+
 ## 开发
 
 ```bash
