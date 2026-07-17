@@ -1,0 +1,20 @@
+{
+  "name": "songloft-plugin-go-music-js",
+  "version": "0.1.4",
+  "private": true,
+  "scripts": {
+    "build": "songloft-plugin build && node scripts/sync-root-manifest.mjs",
+    "dev": "songloft-plugin dev",
+    "validate": "songloft-plugin validate",
+    "publish:release": "songloft-plugin publish"
+  },
+  "dependencies": {
+    "aes-js": "^3.1.2"
+  },
+  "devDependencies": {
+    "@songloft/musicsdk": "^2.0.0-alpha.1",
+    "@songloft/plugin-builder": "^2.12.1",
+    "@songloft/plugin-sdk": "^2.12.1",
+    "typescript": "^5.0.0"
+  }
+}

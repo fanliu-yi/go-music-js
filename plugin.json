@@ -1,0 +1,22 @@
+{
+  "$schema": "https://raw.githubusercontent.com/songloft-org/plugin-toolchain/main/schemas/plugin.schema.json",
+  "name": "Go Music JS",
+  "version": "0.1.4",
+  "description": "Built-in source Songloft music plugin with multi-platform search, playback, lyrics, covers, and import.",
+  "author": "Tualatin",
+  "homepage": "",
+  "license": "CC-BY-NC-4.0",
+  "icon": "icon.svg",
+  "entryPath": "go-music-js",
+  "main": "main.js",
+  "minHostVersion": "2.6.0",
+  "permissions": [
+    "storage",
+    "songs.read",
+    "songs.write",
+    "playlists.read",
+    "playlists.write"
+  ],
+  "entryHash": "8ea5fc7104bb02f71a8af6d5410d1062305a739781ec242508299283b5826175",
+  "zipHash": "1fcde0db043ac54b2a2ed270101874b7f4a5187f8bbc16b423f81aa998dcd896"
+}

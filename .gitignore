@@ -1,0 +1,9 @@
+node_modules/
+dist/
+build/
+*.log
+.songloft-dev.json
+backups/
+design-previews/
+_local_music_page.json
+*.jsplugin.zip

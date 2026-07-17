@@ -1,0 +1,265 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <title>Go Music JS</title>
+    <link rel="stylesheet" href="static/css/style.css">
+  </head>
+  <body>
+    <button id="settingsBtn" class="settings-btn" title="设置" aria-label="设置">⚙</button>
+    <div id="operationToast" class="operation-toast" role="status" aria-live="polite"></div>
+
+    <main class="page-shell">
+      <section class="search-box">
+        <header class="brand">
+          <div class="brand-mark">♪</div>
+          <h1><a href="#" onclick="return false;">Go Music JS</a></h1>
+        </header>
+
+        <form id="searchForm">
+          <input type="hidden" name="page" value="1">
+
+          <div class="search-type-switch" role="radiogroup" aria-label="搜索类型">
+            <label class="type-option">
+              <input type="radio" name="searchType" value="song" checked>
+              <span>单曲搜索</span>
+            </label>
+            <label class="type-option">
+              <input type="radio" name="searchType" value="playlist">
+              <span>歌单搜索</span>
+            </label>
+            <label class="type-option">
+              <input type="radio" name="searchType" value="album">
+              <span>专辑搜索</span>
+            </label>
+          </div>
+
+          <div class="input-group">
+            <input id="searchKeyword" type="search" placeholder="搜索歌曲、歌手，或直接粘贴分享链接" autocomplete="off">
+            <button id="searchBtn" class="search-btn" type="submit" aria-label="搜索">⌕</button>
+          </div>
+
+          <div class="quick-actions">
+            <button id="recommendBtn" type="button" class="pill pink"><span aria-hidden="true">◉</span>推荐歌单</button>
+            <button id="leaderboardBtn" type="button" class="pill blue"><span aria-hidden="true">▦</span>排行榜</button>
+            <button id="localListBtn" type="button" class="pill coral"><span aria-hidden="true">▰</span>本地歌单</button>
+            <button id="localMusicBtn" type="button" class="pill coral"><span aria-hidden="true">♫</span>本地音乐</button>
+            <button id="myPlaylistsBtn" type="button" class="pill cyan"><span aria-hidden="true">♥</span>我的歌单</button>
+          </div>
+
+          <div class="source-selector" id="sourceSelector">
+            <div class="source-header">
+              <button id="sourceToggleBtn" type="button" class="source-collapse-btn" aria-expanded="true" aria-controls="sourceGrid">
+                <span class="source-title">搜索源设置</span>
+                <span class="source-collapse-icon" aria-hidden="true">⌃</span>
+              </button>
+              <div class="source-actions">
+                <button type="button" id="sourceSortBtn" class="ctrl-btn">排序</button>
+                <button type="button" id="selectAllSources" class="ctrl-btn">全选</button>
+                <button type="button" id="clearSources" class="ctrl-btn">清空</button>
+              </div>
+            </div>
+            <div id="sourceGrid" class="source-grid"></div>
+          </div>
+        </form>
+      </section>
+
+      <section class="results-panel">
+        <div class="list-header" id="summaryBar">
+          <div>
+            <div class="result-count">
+              <span id="resultLabel">找到</span>
+              <span class="count" id="resultCount">0</span>
+              <span id="resultUnit">首歌曲</span>
+            </div>
+            <div class="page-summary" id="resultMeta">当前第 1 / 1 页，显示 0 - 0 / 0</div>
+          </div>
+          <div class="summary-actions">
+            <button id="playAllBtn" type="button" class="ctrl-btn primary">播放全部</button>
+            <button id="batchBtn" type="button" class="ctrl-btn primary">批量操作</button>
+          </div>
+        </div>
+
+        <div id="batchToolbar" class="batch-toolbar">
+          <div class="batch-info">
+            <label class="batch-select-all">
+              <input type="checkbox" id="selectAllSongs">
+              <span>全选</span>
+            </label>
+            <span>已选 <strong id="selectedCount">0</strong> 首</span>
+          </div>
+          <div class="batch-actions">
+            <button id="batchImportBtn" type="button" class="btn-pill btn-pill-primary">批量导入</button>
+          </div>
+        </div>
+
+        <section id="status" class="status" aria-live="polite"></section>
+        <div id="viewToolbar" class="view-toolbar" hidden>
+          <button id="viewBackBtn" type="button" class="ctrl-btn view-back-btn">返回</button>
+        </div>
+        <section id="results" class="results"></section>
+
+        <div id="pagination" class="pagination-bar"></div>
+      </section>
+    </main>
+
+    <div id="sourceSwitchLayer" class="source-switch-layer" hidden>
+      <div class="source-switch-backdrop"></div>
+      <section class="source-switch-modal" role="dialog" aria-modal="false" aria-labelledby="sourceSwitchTitle">
+        <header class="source-switch-head">
+          <h2 id="sourceSwitchTitle">歌曲换源</h2>
+          <button id="sourceSwitchClose" type="button" class="source-switch-close" aria-label="关闭">×</button>
+        </header>
+        <nav id="sourceSwitchTabs" class="source-switch-tabs" aria-label="候选平台"></nav>
+        <div id="sourceSwitchList" class="source-switch-list"></div>
+        <footer class="source-switch-footer">
+          <div id="sourceSwitchCompare" class="source-switch-compare"></div>
+          <button id="sourceSwitchConfirm" type="button" class="source-switch-confirm" disabled>确认</button>
+        </footer>
+      </section>
+    </div>
+
+    <footer class="player-bar">
+      <div class="now-playing">
+        <div id="playerCover" class="cover"></div>
+        <div class="now-playing-lines">
+          <strong id="playerTitle">未播放</strong>
+          <span id="playerArtist">选择一首歌试听</span>
+          <em id="playerState" class="player-state">空闲</em>
+        </div>
+      </div>
+      <div class="player-center">
+        <div class="timeline">
+          <span id="currentTime">00:00</span>
+          <input id="seekBar" type="range" min="0" max="1000" value="0">
+          <span id="durationTime">00:00</span>
+        </div>
+        <div class="transport">
+          <button id="loopBtn" title="循环">↻</button>
+          <button id="prevBtn" title="上一首">◀</button>
+          <button id="playPauseBtn" class="main-play" title="播放/暂停">▶</button>
+          <button id="nextBtn" title="下一首">▶</button>
+          <button id="speedBtn" title="速度">1.0x</button>
+        </div>
+      </div>
+      <div class="player-tools">
+        <span class="volume">音量<input id="volumeBar" type="range" min="0" max="1" step="0.01" value="0.72"></span>
+      </div>
+      <audio id="audio"></audio>
+    </footer>
+
+    <dialog id="settingsDialog" class="settings-dialog">
+      <form method="dialog" class="settings-card original-settings-modal">
+        <header class="dialog-head settings-modal-head">
+          <h2>设置</h2>
+          <button value="close" class="icon-btn" aria-label="关闭">×</button>
+        </header>
+
+        <div class="settings-scroll">
+          <section class="settings-section cookie-section">
+            <div class="section-head">
+              <h3>平台设置</h3>
+            </div>
+            <div id="cookieFields" class="cookie-fields"></div>
+          </section>
+
+          <section class="settings-section settings-pane">
+            <label class="field wide">
+              <span>下载目录</span>
+              <div class="download-dir-control">
+                <select id="settingDownloadDirPreset" aria-label="下载目录预设">
+                  <option value="data/downloads">PC 默认：data/downloads</option>
+                  <option value="downloads">PC 简洁：downloads</option>
+                  <option value="D:/Music/Downloads">PC 示例：D:/Music/Downloads</option>
+                  <option value="/sdcard/Music">Android 默认：/sdcard/Music</option>
+                  <option value="/storage/emulated/0/Music">Android 兼容：/storage/emulated/0/Music</option>
+                  <option value="/sdcard/Download">Android 下载：/sdcard/Download</option>
+                  <option value="__custom__">自定义目录…</option>
+                </select>
+                <input id="settingDownloadDir" type="text" placeholder="例如: /music/go-music">
+              </div>
+              <small>选择预设会自动填入路径，也可以直接输入相对目录或绝对目录。</small>
+            </label>
+
+            <label class="field wide">
+              <span>文件名模板</span>
+              <input id="settingDownloadFilenameTemplate" type="text" placeholder="{name} - {artist}">
+              <small>支持 {name}、{artist}、{album}、{source}、{id}、{ext}。</small>
+            </label>
+
+            <label class="field wide">
+              <span>每页条数</span>
+              <input id="settingWebPageSize" type="number" min="1" max="200" step="1" placeholder="100">
+              <small>用于网页列表分页显示。</small>
+            </label>
+
+            <label class="setting-toggle setting-card-row" for="settingEmbedDownload">
+              <input type="checkbox" id="settingEmbedDownload">
+              <span class="setting-switch" aria-hidden="true"></span>
+              <span class="setting-toggle-body">
+                <strong>下载时内嵌元数据（封面、歌词）</strong>
+                <small>会影响保存到本地目录和浏览器下载两种方式。</small>
+              </span>
+            </label>
+
+          </section>
+
+          <section class="settings-section log-section">
+            <div class="section-head log-section-head">
+              <h3>日志</h3>
+              <div class="log-actions">
+                <button id="clearLogsBtn" type="button" class="subtle-small">清空</button>
+              </div>
+            </div>
+            <div class="log-toolbar">
+              <input id="logSearchInput" type="search" placeholder="搜索日志...">
+              <select id="logContextFilter" aria-label="日志模块">
+                <option value="">全部模块</option>
+              </select>
+              <select id="logLevelFilter" aria-label="日志等级">
+                <option value="">全部</option>
+                <option value="info">Info</option>
+                <option value="warn">Warn</option>
+                <option value="error">Error</option>
+                <option value="trace">Trace</option>
+              </select>
+            </div>
+            <div id="logWindow" class="log-window" aria-live="polite">
+              <div class="log-empty">暂无日志</div>
+            </div>
+          </section>
+
+          <footer class="settings-footer">
+            <button id="saveSettingsBtn" type="button" class="btn-save">保存设置</button>
+          </footer>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="qrLoginDialog" class="qr-login-dialog">
+      <form method="dialog" class="qr-login-card">
+        <header class="dialog-head">
+          <h2 id="qrLoginTitle">扫码登录</h2>
+          <button id="qrLoginCloseBtn" value="close" class="icon-btn" aria-label="关闭">×</button>
+        </header>
+        <div class="qr-login-body">
+          <div class="qr-login-frame">
+            <canvas id="qrLoginCanvas" width="260" height="260" aria-label="扫码登录二维码"></canvas>
+            <img id="qrLoginImage" alt="扫码登录二维码">
+            <div id="qrLoginLoading" class="qr-login-loading">正在生成二维码...</div>
+          </div>
+          <p id="qrLoginStatus" class="qr-login-status">请使用对应 App 扫码登录</p>
+          <div class="qr-login-actions">
+            <button id="qrLoginRefreshBtn" type="button" class="ctrl-btn primary">刷新二维码</button>
+            <button id="qrLoginActionCloseBtn" type="button" class="ctrl-btn qr-close-action">关闭</button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="static/js/app.js"></script>
+  </body>
+</html>
+
