@@ -1,1 +1,1 @@
-SHA256  3D80A647F34A12F035FC80185C267C942A2D3A7E409A8A84CD53809F44526398  go-music-js-v0.1.6.jsplugin.zip
+0d2ac8bcee4631eacd4f00a2d4b6abb81a6b06b2b9029e39fd81edafe0a4dc4b  go-music-js-v0.17.jsplugin.zip
