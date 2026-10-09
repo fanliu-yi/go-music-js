@@ -1,22 +1,13 @@
-# Songloft Go Music DL Plugin
+# Go Music JS
 
-Go Music JS 是基于 [go-music-dl](https://github.com/guohuiyuan/go-music-dl) 项目开发的 Songloft JS 插件版，在 Songloft 插件容器内运行。
+基于 go-music-dl 开发的 Songloft JS 音乐插件，在 Songloft 插件容器内运行。
 
-## 功能
+当前正式版本：**0.18**（内部版本 0.18.0）。
 
-- 多平台歌曲搜索、播放、歌词与封面获取。
-- 推荐歌单、排行榜、平台歌单及本地曲库浏览。
-- Cookie 与已支持平台的扫码登录。
-- 歌曲换源试听、单曲或批量导入 Songloft。
-- 播放设置、日志查看与适配桌面/手机的界面。
+- [下载正式插件包](https://github.com/fanliu-yi/go-music-js/releases/download/v0.18/go-music-js-0.18.jsplugin.zip)
+- [查看更新内容](RELEASE_NOTES_v0.18.md)
+- [历史发布](https://github.com/fanliu-yi/go-music-js/releases)
 
-当前正式版本为 `0.17`，更新内容见 GitHub Release 页面。
+支持多平台搜索与播放、推荐歌单、排行榜、我的歌单、本地音乐、换源、曲库导入和歌曲下载，适配电脑及安卓界面。
 
-## 构建
-
-```bash
-npm install
-npm run build
-```
-
-构建产物位于 `dist/go-music-js-v0.17.jsplugin.zip`。
+本仓库仅发布插件产物、更新索引及说明。源码保存在本地，不在本仓库公开。
