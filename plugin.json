@@ -1,12 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/songloft-org/plugin-toolchain/main/schemas/plugin.schema.json",
   "name": "Go Music JS",
-  "version": "0.18.0",
+  "version": "0.19.0",
   "description": "Go Music JS 是 go-music-dl 项目的 JS 插件版，面向 Songloft 插件系统使用。",
   "author": "fanliu-yi",
   "homepage": "https://github.com/fanliu-yi/go-music-js",
   "license": "CC-BY-NC-4.0",
-  "icon": "icon.svg",
+  "icon": "icon.png",
   "entryPath": "go-music-js",
   "main": "main.js",
   "minHostVersion": "2.6.0",
@@ -18,8 +18,8 @@
     "playlists.read",
     "playlists.write"
   ],
-  "entryHash": "434172412343e80afee3269f2c4d585fb4a06046c6b37e03c7932e3a4fbb78ee",
-  "zipHash": "1d72ff5feebef4d3219e28e1b3268ab155fa06b07fb0a7cdc93566992b9a4df5",
-  "download_url": "https://github.com/fanliu-yi/go-music-js/releases/download/v0.18/go-music-js-0.18.jsplugin.zip",
+  "entryHash": "a88f3fa3bbd96afeac7570e9ebde4121c49c19c9977e0b7bb4aec87394ec3308",
+  "zipHash": "45510a29d498aae43062efa913819c33057509e907780b8173874408a8c6f0fc",
+  "download_url": "https://github.com/fanliu-yi/go-music-js/releases/download/v0.19/go-music-js-0.19.jsplugin.zip",
   "updateUrl": "https://raw.githubusercontent.com/fanliu-yi/go-music-js/main/plugin.json"
 }
